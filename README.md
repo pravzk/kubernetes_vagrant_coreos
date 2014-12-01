@@ -5,35 +5,61 @@ Cluster of kubernetes includes only one coreos virtual machine.
 
 Install virtual box and vagrant initially.
 
-Run vagrant file by following command
+Run vagrant file by following command:
 ~~~ sh
 	"vagrant up"
 ~~~
 With the previous command one coreos instance will be created.
 
 
-Now ssh to coreos instance by following command
+Now ssh to coreos instance by following command:
 ~~~ sh
 	"vagrant ssh"
 ~~~
 (if proxy has to be set then set https_proxy, http_proxy and no_proxy in every terminal).
 
 
-Run the following commands 
+Run the following commands in sequence 
+~~~ sh
 	sudo mkdir -p /opt/kubernetes/bin 
 	sudo chown -R core: /opt/kubernetes
 	cd /opt/kubernetes
 	wget https://github.com/kelseyhightower/kubernetes-coreos/releases/download/v0.0.1/kubernetes-coreos.tar.gz
 	tar -C bin/ -xvf kubernetes-coreos.tar.gz
-	start etcd service by "sudo systemctl start etcd"
-	start docker service by "sudo <HTTP_PROXY=your_proxy> docker -d"
-	open new terminal of coreos instance and start apiserver by "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/apiserver --address=127.0.0.1 --port=8080 --etcd_servers=http://127.0.0.1:4001 --machines=127.0.0.1 --logtostderr=true"
-	open new terminal of coreos instance and start controller-manager by "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/controller-manager --master=127.0.0.1:8080 --etcd_servers=http://127.0.0.1:4001 --logtostderr=true"
-	open new terminal of coreos instance and start kubelet by "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubelet --address=127.0.0.1 --port=10250 --hostname_override=127.0.0.1 --etcd_servers=http://127.0.0.1:4001 --logtostderr=true"
-	open new terminal of coreos instance and start proxy by "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/proxy --etcd_servers=http://127.0.0.1:4001 -logtostderr=true"
-	open new terminal of coreos instance and run kubernetes commands using kubecfg 
-		to see list of pods use command "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 list /pods"
-		to deploy and run a web app follow these commads
+~~~
+
+Start etcd service by 
+~~~ sh
+	"sudo systemctl start etcd"
+~~~
+Start docker service by 
+~~~ sh
+	"sudo <HTTP_PROXY=your_proxy> docker -d"
+~~~
+Open new terminal of coreos instance and start apiserver by 
+~~~ sh
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/apiserver --address=127.0.0.1 --port=8080 --etcd_servers=http://127.0.0.1:4001 --machines=127.0.0.1 --logtostderr=true"
+~~~
+Open new terminal of coreos instance and start controller-manager by 
+~~~ sh
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/controller-manager --master=127.0.0.1:8080 --etcd_servers=http://127.0.0.1:4001 --logtostderr=true"
+~~~
+Open new terminal of coreos instance and start kubelet by 
+~~~ sh 
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubelet --address=127.0.0.1 --port=10250 --hostname_override=127.0.0.1 --etcd_servers=http://127.0.0.1:4001 --logtostderr=true"
+~~~
+Open new terminal of coreos instance and start proxy by 
+~~~ sh
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/proxy --etcd_servers=http://127.0.0.1:4001 -logtostderr=true"
+~~~
+Open new terminal of coreos instance and run kubernetes commands using kubecfg.
+
+
+To see list of pods use following command 
+~~~ sh
+	command "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 list /pods"
+~~~
+To deploy and run a web app follow these commads
 			create a json file specifying image details
 				web.json
 					{
