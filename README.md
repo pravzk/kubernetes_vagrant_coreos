@@ -52,39 +52,37 @@ Open new terminal of coreos instance and start proxy by
 ~~~ sh
 	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/proxy --etcd_servers=http://127.0.0.1:4001 -logtostderr=true"
 ~~~
-Open new terminal of coreos instance and run kubernetes commands using kubecfg.
+Open new terminal of coreos instance and run kubernetes commands using kubecfg as shown below.
 
 
 To see list of pods use following command 
 ~~~ sh
-	command "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 list /pods"
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 list /pods"
 ~~~
-To deploy and run a web app follow these commads
-			create a json file specifying image details
-				web.json
-					{
-					  "id": "web",
-					  "desiredState": {
-					    "manifest": {
-					      "version": "v1beta1",
-					      "id": "web",
-					      "containers": [{
-						"name": "web",
-						"image": "tutum/apache-php",
-						"ports": [{
-						  "containerPort": 80,
-						  "hostPort": 80 
-						}]
-					      }]
-					    }
-					  },
-					  "labels": {
-					    "name": "web"
-					  }
-					}
-			run this command "sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 -c web.json create /pods" which creates a pod
-			
-	
-	
-	
-	
+To deploy and run a web app use following command
+~~~ sh
+	"sudo <HTTP_PROXY=your_proxy> /opt/kubernetes/bin/kubecfg -h http://127.0.0.1:8080 -c web.json create /pods"
+~~~
+The file web.json has image details and content of file is 
+~~~ sh
+	{
+	  "id": "web",
+	  "desiredState": {
+	    "manifest": {
+	      "version": "v1beta1",
+	      "id": "web",
+	      "containers": [{
+		"name": "web",
+		"image": "tutum/apache-php",
+		"ports": [{
+		  "containerPort": 80,
+		  "hostPort": 80 
+		}]
+	      }]
+	    }
+	  },
+	  "labels": {
+	    "name": "web"
+	  }
+	}
+~~~
