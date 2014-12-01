@@ -9,9 +9,16 @@ Run vagrant file by following command
 ~~~ sh
 	"vagrant up"
 ~~~
-With the previous command one coreos instance will be created
-Now ssh to coreos instance by "vagrant ssh"
-(if proxy has to be set then set https_proxy, http_proxy and no_proxy in every terminal)
+With the previous command one coreos instance will be created.
+
+
+Now ssh to coreos instance by following command
+~~~ sh
+	"vagrant ssh"
+~~~
+(if proxy has to be set then set https_proxy, http_proxy and no_proxy in every terminal).
+
+
 Run the following commands 
 	sudo mkdir -p /opt/kubernetes/bin 
 	sudo chown -R core: /opt/kubernetes
