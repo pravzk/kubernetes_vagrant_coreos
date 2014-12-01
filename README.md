@@ -1,5 +1,7 @@
 Deploying and Running a web app using Kubernetes and docker
+==================
 cluster of kubernetes includes only one coreos virtual machine
+==================
 
 Install virtual box and vagrant initially
 run vagrant file by "vagrant up" command
